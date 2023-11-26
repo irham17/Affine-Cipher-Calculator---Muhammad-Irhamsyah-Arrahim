@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affine Cipher</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body class="container mt-5">
+    <h1 class="mb-4 text-center">Affine Cipher</h1>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="text">Teks:</label>
+            <textarea class="form-control" id="text" name="text" rows="4" required style="border-color: black;">{{ request.form['text'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="a">Kunci 'a':</label>
+            <input type="number" class="form-control" id="a" name="a" required value="{{ request.form['a'] }}" style="border-color: black;">
+        </div>
+        <div class="form-group">
+            <label for="b">Kunci 'b':</label>
+            <input type="number" class="form-control" id="b" name="b" required value="{{ request.form['b'] }}" style="border-color: black;">
+        </div>
+        <div class="form-group">
+            <label for="mode">Mode:</label>
+            <select class="form-control" id="mode" name="mode" required style="border-color: black;">
+                <option value="encrypt" {% if request.form['mode'] == 'encrypt' %}selected{% endif %}>Enkripsi</option>
+                <option value="decrypt" {% if request.form['mode'] == 'decrypt' %}selected{% endif %}>Dekripsi</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if output_text %}
+        <div class="mt-4">
+            <h2>Hasil:</h2>
+            <h3>{{ output_text }}</h3>
+        </div>
+    {% endif %}
+</body>
+</html>
